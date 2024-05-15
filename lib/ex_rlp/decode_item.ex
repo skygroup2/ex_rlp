@@ -4,7 +4,9 @@ defmodule ExRLP.DecodeItem do
   """
 
   @spec decode_item(binary(), boolean()) :: ExRLP.t()
-  def decode_item(rlp_binary, stream), do: do_decode_item(rlp_binary, nil, stream)
+  def decode_item(rlp_binary, stream) do
+    do_decode_item(rlp_binary, nil, stream)
+  end
   ##
   ## HANDLING 0 - 127
   ##
@@ -15,14 +17,16 @@ defmodule ExRLP.DecodeItem do
   # `list_result` - possibly a result of decoding a list payload:
   #   - if `nil`: we are not processing a list
   #   - if a list: we are processing a list, and we have this much currently
-  @spec do_decode_item(payload :: binary(), list_result :: ExRLP.t(), boolean()) :: ExRLP.t()
-  defp do_decode_item(payload, result, stream \\ false)
+  defp do_decode_item(payload, result) do
+    do_decode_item(payload, result, false)
+  end
 
+  @spec do_decode_item(payload :: binary(), list_result :: ExRLP.t(), boolean()) :: ExRLP.t()
   defp do_decode_item(<<n, tail::binary>>, nil, stream) when n < 128 do
     if stream do
       {<<n>>, tail}
     else
-      do_decode_item(tail, <<n>>)
+      do_decode_item(tail, [<<n>>])
     end
   end
 
