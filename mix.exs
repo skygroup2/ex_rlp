@@ -25,11 +25,11 @@ defmodule ExRLP.Mixfile do
 
   defp deps do
     [
-      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.32.2", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.4.3", only: [:dev, :test], runtime: false},
       {:jason, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:propcheck, "~> 1.4", only: [:test]}
+      {:propcheck, git: "https://github.com/alfert/propcheck.git", branch: "master", only: [:test]}
     ]
   end
 
